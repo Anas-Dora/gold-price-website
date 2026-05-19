@@ -59,8 +59,8 @@ class _HomePageState extends State<HomePage> {
               constraints: const BoxConstraints(maxWidth: 1400),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 40,
-                  vertical: 72,
+                  horizontal: 16,
+                  vertical: 12,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,45 +72,45 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             'DURRAH',
                             style: GoogleFonts.playfairDisplay(
-                              fontSize: 96,
+                              fontSize: 34,
                               fontWeight: FontWeight.w700,
-                              letterSpacing: 12,
+                              letterSpacing: 6,
                               color: const Color(0xFF1F1B14),
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 2),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               _goldDivider(),
-                              const SizedBox(width: 18),
+                              const SizedBox(width: 8),
                               Text(
                                 'J U W E L I E R',
                                 style: GoogleFonts.manrope(
-                                  fontSize: 22,
+                                  fontSize: 11,
                                   fontWeight: FontWeight.w500,
-                                  letterSpacing: 8,
+                                  letterSpacing: 4,
                                   color: const Color(0xFF9C7C38),
                                 ),
                               ),
-                              const SizedBox(width: 18),
+                              const SizedBox(width: 8),
                               _goldDivider(),
                             ],
                           ),
-                          const SizedBox(height: 12),
+                          const SizedBox(height: 4),
                           Text(
                             'Echtgold. Echte Preise. Jeden Tag.',
                             style: GoogleFonts.manrope(
-                              fontSize: 22,
+                              fontSize: 11,
                               color: const Color(0xFF7A6A52),
-                              letterSpacing: 1.5,
+                              letterSpacing: 1.0,
                             ),
                           ),
                         ],
                       ),
                     ),
 
-                    const SizedBox(height: 72),
+                    const SizedBox(height: 10),
 
                     // ── Section title + live badge ───────────────────────────
                     Row(
@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                         Text(
                           'Live Goldpreise',
                           style: GoogleFonts.playfairDisplay(
-                            fontSize: 56,
+                            fontSize: 22,
                             fontWeight: FontWeight.w700,
                             color: const Color(0xFF1F1B14),
                           ),
@@ -129,16 +129,16 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
 
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 2),
                     Text(
                       'Preise pro Gramm · Basis: Spotpreis XAU/EUR',
                       style: GoogleFonts.manrope(
-                        fontSize: 20,
+                        fontSize: 11,
                         color: const Color(0xFF9A8C78),
                       ),
                     ),
 
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 8),
 
                     // ── Price grid ──────────────────────────────────────────
                     LayoutBuilder(
@@ -201,9 +201,9 @@ class _HomePageState extends State<HomePage> {
                           crossAxisCount: cols,
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          crossAxisSpacing: 24,
-                          mainAxisSpacing: 24,
-                          childAspectRatio: 1.1,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                          childAspectRatio: 2.1,
                           children: [
                             GoldCard(
                               title: '24 Karat',
@@ -279,23 +279,23 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
 
-                    const SizedBox(height: 60),
+                    const SizedBox(height: 8),
 
                     // ── Footer info bar ──────────────────────────────────────
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 36,
-                        vertical: 24,
+                        horizontal: 12,
+                        vertical: 6,
                       ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFEDE5D8),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(14),
                         border: Border.all(color: const Color(0xFFD0C5B1)),
                       ),
                       child: Wrap(
-                        spacing: 48,
-                        runSpacing: 16,
+                        spacing: 16,
+                        runSpacing: 6,
                         alignment: WrapAlignment.spaceAround,
                         children: [
                           _infoChip(
@@ -318,13 +318,13 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
 
-                    const SizedBox(height: 36),
+                    const SizedBox(height: 4),
 
                     Center(
                       child: Text(
                         '© 2026 Durrah Juwelier · Alle Rechte vorbehalten',
                         style: GoogleFonts.manrope(
-                          fontSize: 18,
+                          fontSize: 11,
                           color: const Color(0xFFB0A08A),
                         ),
                       ),
@@ -340,15 +340,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _goldDivider() => Container(
-    width: 72,
-    height: 2.5,
+    width: 28,
+    height: 1,
     decoration: const BoxDecoration(
       gradient: LinearGradient(colors: [Color(0xFFE3BC58), Color(0xFFBF9B30)]),
     ),
   );
 
   Widget _liveBadge() => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 11),
+    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
     decoration: BoxDecoration(
       color: const Color(0xFFFBF2E7),
       borderRadius: BorderRadius.circular(999),
@@ -365,11 +365,11 @@ class _HomePageState extends State<HomePage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         const PulsingDot(),
-        const SizedBox(width: 12),
+        const SizedBox(width: 6),
         Text(
           _vm.lastUpdatedLabel,
           style: GoogleFonts.manrope(
-            fontSize: 18,
+            fontSize: 12,
             fontWeight: FontWeight.w500,
             color: const Color(0xFF4D4637),
           ),
@@ -381,12 +381,12 @@ class _HomePageState extends State<HomePage> {
   Widget _infoChip(IconData icon, String label) => Row(
     mainAxisSize: MainAxisSize.min,
     children: [
-      Icon(icon, size: 22, color: const Color(0xFF9C7C38)),
-      const SizedBox(width: 10),
+      Icon(icon, size: 11, color: const Color(0xFF9C7C38)),
+      const SizedBox(width: 4),
       Text(
         label,
         style: GoogleFonts.manrope(
-          fontSize: 18,
+          fontSize: 11,
           color: const Color(0xFF5C4F3A),
         ),
       ),

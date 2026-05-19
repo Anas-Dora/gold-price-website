@@ -30,7 +30,7 @@ class GoldCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: dark ? const Color(0xFF2C2720) : Colors.white,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: featured ? const Color(0xFFE3BC58) : const Color(0xFFE0D8CC),
           width: featured ? 2 : 1,
@@ -53,8 +53,8 @@ class GoldCard extends StatelessWidget {
               right: 0,
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
+                  horizontal: 10,
+                  vertical: 5,
                 ),
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -68,7 +68,7 @@ class GoldCard extends StatelessWidget {
                 child: Text(
                   'Beliebt',
                   style: GoogleFonts.manrope(
-                    fontSize: 16,
+                    fontSize: 11,
                     fontWeight: FontWeight.w700,
                     color: const Color(0xFF251A00),
                     letterSpacing: 0.5,
@@ -78,11 +78,11 @@ class GoldCard extends StatelessWidget {
             ),
 
           Padding(
-            padding: const EdgeInsets.all(28),
+            padding: const EdgeInsets.all(9),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (featured) const SizedBox(height: 18),
+                if (featured) const SizedBox(height: 8),
 
                 // Title row
                 Row(
@@ -95,18 +95,18 @@ class GoldCard extends StatelessWidget {
                         Text(
                           title,
                           style: GoogleFonts.playfairDisplay(
-                            fontSize: 44,
+                            fontSize: 18,
                             fontWeight: FontWeight.w700,
                             color: dark
                                 ? const Color(0xFFF8F0E4)
                                 : const Color(0xFF1F1B14),
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 2),
                         Text(
                           purity,
                           style: GoogleFonts.manrope(
-                            fontSize: 17,
+                            fontSize: 11,
                             color: dark
                                 ? const Color(0xFFB09A6A)
                                 : const Color(0xFF9A8C78),
@@ -115,19 +115,19 @@ class GoldCard extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: dark
                             ? const Color(0xFF3D3628)
                             : const Color(0xFFFBF2E7),
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(7),
                       ),
                       child: Icon(
                         icon,
                         color: dark
                             ? const Color(0xFFE3BC58)
                             : const Color(0xFF9C7C38),
-                        size: 28,
+                        size: 13,
                       ),
                     ),
                   ],
@@ -139,18 +139,18 @@ class GoldCard extends StatelessWidget {
                 Text(
                   price,
                   style: GoogleFonts.manrope(
-                    fontSize: 52,
+                    fontSize: 21,
                     fontWeight: FontWeight.w800,
                     color: dark
                         ? const Color(0xFFF8F0E4)
                         : const Color(0xFF1F1B14),
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 2),
                 Text(
                   priceLabel,
                   style: GoogleFonts.manrope(
-                    fontSize: 16,
+                    fontSize: 10,
                     color: dark
                         ? const Color(0xFFB09A6A)
                         : const Color(0xFFB0A08A),
@@ -158,13 +158,13 @@ class GoldCard extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 8),
+                const SizedBox(height: 4),
 
                 // Trend chip
                 Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
+                    horizontal: 6,
+                    vertical: 3,
                   ),
                   decoration: BoxDecoration(
                     color: trendUp
@@ -179,16 +179,16 @@ class GoldCard extends StatelessWidget {
                         trendUp
                             ? Icons.trending_up_rounded
                             : Icons.trending_down_rounded,
-                        size: 18,
+                        size: 11,
                         color: trendUp
                             ? const Color(0xFF16A34A)
                             : const Color(0xFFDC2626),
                       ),
-                      const SizedBox(width: 6),
+                      const SizedBox(width: 4),
                       Text(
                         percent,
                         style: GoogleFonts.manrope(
-                          fontSize: 17,
+                          fontSize: 11,
                           fontWeight: FontWeight.w600,
                           color: trendUp
                               ? const Color(0xFF16A34A)
