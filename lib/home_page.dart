@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,16 +17,32 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final GoldPriceViewModel _vm;
+  StreamSubscription<DocumentSnapshot>? _refreshSub;
+  Timestamp? _lastRefreshTs;
 
   @override
   void initState() {
     super.initState();
     _vm = GoldPriceViewModel();
     _vm.init();
+    _refreshSub = FirebaseFirestore.instance
+        .collection('preise')
+        .doc('n6SFfgb2zkKYG6LswSqf')
+        .snapshots()
+        .listen((snapshot) {
+          if (!snapshot.exists) return;
+          final data = snapshot.data() as Map<String, dynamic>;
+          final ts = data['refresh_zuletzt_gedrueckt'] as Timestamp?;
+          if (ts != null && ts != _lastRefreshTs) {
+            _lastRefreshTs = ts;
+            _vm.fetchPrice();
+          }
+        });
   }
 
   @override
   void dispose() {
+    _refreshSub?.cancel();
     _vm.dispose();
     super.dispose();
   }
@@ -202,14 +221,32 @@ class _HomePageState extends State<HomePage> {
                               icon: Icons.stars_rounded,
                               trendUp: _vm.changePercent >= 0,
                             ),
-                            GoldCard(
-                              title: '21 Karat',
-                              purity: '875 ‰',
-                              price: _vm.fmt(_vm.karatPrice(21)),
-                              percent: _vm.fmtPct(_vm.changePercent),
-                              icon: Icons.workspace_premium_rounded,
-                              trendUp: _vm.changePercent >= 0,
-                              featured: true,
+                            StreamBuilder<DocumentSnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection('preise')
+                                  .doc('n6SFfgb2zkKYG6LswSqf')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                final String price21k;
+                                if (snapshot.hasData && snapshot.data!.exists) {
+                                  final data =
+                                      snapshot.data!.data()
+                                          as Map<String, dynamic>;
+                                  final raw = data['gold_21k'];
+                                  price21k = _vm.fmt((raw as num).toDouble());
+                                } else {
+                                  price21k = _vm.fmt(_vm.karatPrice(21));
+                                }
+                                return GoldCard(
+                                  title: '21 Karat',
+                                  purity: '875 ‰',
+                                  price: price21k,
+                                  percent: _vm.fmtPct(_vm.changePercent),
+                                  icon: Icons.workspace_premium_rounded,
+                                  trendUp: _vm.changePercent >= 0,
+                                  featured: true,
+                                );
+                              },
                             ),
                             GoldCard(
                               title: '18 Karat',
