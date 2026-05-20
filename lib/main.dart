@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:gold_price_website/firebase_options.dart';
-import 'package:gold_price_website/home_page.dart';
+import 'package:gold_price_website/server/firebase_options.dart';
+import 'package:gold_price_website/views/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

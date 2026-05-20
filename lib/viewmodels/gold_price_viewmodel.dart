@@ -1,15 +1,14 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
 
 import '../models/gold_rate.dart';
+import '../server/gold_price_service.dart';
 
-const _apiKey = 'GMDBOXJDJDO7Z0SKBEYS960SKBEYS';
 const _gramsPerTroyOz = 31.1034768;
 
 class GoldPriceViewModel extends ChangeNotifier {
+  final _service = GoldPriceService();
   GoldRate? _rate;
   bool _isLoading = true;
   bool _hasError = false;
@@ -71,22 +70,9 @@ class GoldPriceViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final uri = Uri.https('api.metals.dev', '/v1/metal/spot', {
-        'api_key': _apiKey,
-        'metal': 'gold',
-        'currency': 'EUR',
-      });
-      final response = await http.get(uri).timeout(const Duration(seconds: 10));
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body) as Map<String, dynamic>;
-        _rate = GoldRate.fromJson(data);
-        _isLoading = false;
-        _lastUpdated = DateTime.now();
-      } else {
-        _hasError = true;
-        _isLoading = false;
-      }
+      _rate = await _service.fetchSpotPrice();
+      _isLoading = false;
+      _lastUpdated = DateTime.now();
     } catch (_) {
       _hasError = true;
       _isLoading = false;

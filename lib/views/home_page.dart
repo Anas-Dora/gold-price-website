@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'viewmodels/gold_price_viewmodel.dart';
+import '../viewmodels/gold_price_viewmodel.dart';
 import 'widgets/gold_card.dart';
 import 'widgets/pulsing_dot.dart';
 
@@ -210,15 +210,14 @@ class _HomePageState extends State<HomePage> {
                               purity: '999,9 ‰',
                               price: _vm.fmt(_vm.karatPrice(24)),
                               percent: _vm.fmtPct(_vm.changePercent),
-                              icon: Icons.stars_rounded,
                               trendUp: _vm.changePercent >= 0,
+                              showTrendChip: true,
                             ),
                             GoldCard(
                               title: '22 Karat',
                               purity: '916 ‰',
                               price: _vm.fmt(_vm.karatPrice(22)),
                               percent: _vm.fmtPct(_vm.changePercent),
-                              icon: Icons.stars_rounded,
                               trendUp: _vm.changePercent >= 0,
                             ),
                             StreamBuilder<DocumentSnapshot>(
@@ -242,7 +241,6 @@ class _HomePageState extends State<HomePage> {
                                   purity: '875 ‰',
                                   price: price21k,
                                   percent: _vm.fmtPct(_vm.changePercent),
-                                  icon: Icons.workspace_premium_rounded,
                                   trendUp: _vm.changePercent >= 0,
                                   featured: true,
                                 );
@@ -253,7 +251,6 @@ class _HomePageState extends State<HomePage> {
                               purity: '750 ‰',
                               price: _vm.fmt(_vm.karatPrice(18)),
                               percent: _vm.fmtPct(_vm.changePercent),
-                              icon: Icons.diamond_rounded,
                               trendUp: _vm.changePercent >= 0,
                             ),
                             GoldCard(
@@ -261,7 +258,6 @@ class _HomePageState extends State<HomePage> {
                               purity: '585 ‰',
                               price: _vm.fmt(_vm.karatPrice(14)),
                               percent: _vm.fmtPct(_vm.changePercent),
-                              icon: Icons.hexagon_outlined,
                               trendUp: _vm.changePercent >= 0,
                             ),
                             GoldCard(
@@ -269,7 +265,6 @@ class _HomePageState extends State<HomePage> {
                               purity: '31,1 g',
                               price: _vm.fmt(_vm.pricePerToz),
                               percent: _vm.fmtPct(_vm.changePercent),
-                              icon: Icons.monetization_on_rounded,
                               trendUp: _vm.changePercent >= 0,
                               dark: true,
                               priceLabel: 'pro Unze',

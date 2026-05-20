@@ -8,22 +8,22 @@ class GoldCard extends StatelessWidget {
     required this.purity,
     required this.price,
     required this.percent,
-    required this.icon,
     required this.trendUp,
     this.featured = false,
     this.dark = false,
     this.priceLabel = 'pro Gramm',
+    this.showTrendChip = false,
   });
 
   final String title;
   final String purity;
   final String price;
   final String percent;
-  final IconData icon;
   final bool trendUp;
   final bool featured;
   final bool dark;
   final String priceLabel;
+  final bool showTrendChip;
 
   @override
   Widget build(BuildContext context) {
@@ -85,49 +85,27 @@ class GoldCard extends StatelessWidget {
                 if (featured) const SizedBox(height: 8),
 
                 // Title row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: GoogleFonts.playfairDisplay(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            color: dark
-                                ? const Color(0xFFF8F0E4)
-                                : const Color(0xFF1F1B14),
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          purity,
-                          style: GoogleFonts.manrope(
-                            fontSize: 11,
-                            color: dark
-                                ? const Color(0xFFB09A6A)
-                                : const Color(0xFF9A8C78),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
+                    Text(
+                      title,
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
                         color: dark
-                            ? const Color(0xFF3D3628)
-                            : const Color(0xFFFBF2E7),
-                        borderRadius: BorderRadius.circular(7),
+                            ? const Color(0xFFF8F0E4)
+                            : const Color(0xFF1F1B14),
                       ),
-                      child: Icon(
-                        icon,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      purity,
+                      style: GoogleFonts.manrope(
+                        fontSize: 11,
                         color: dark
-                            ? const Color(0xFFE3BC58)
-                            : const Color(0xFF9C7C38),
-                        size: 13,
+                            ? const Color(0xFFB09A6A)
+                            : const Color(0xFF9A8C78),
                       ),
                     ),
                   ],
@@ -135,68 +113,77 @@ class GoldCard extends StatelessWidget {
 
                 const Spacer(),
 
-                // Price
-                Text(
-                  price,
-                  style: GoogleFonts.manrope(
-                    fontSize: 21,
-                    fontWeight: FontWeight.w800,
-                    color: dark
-                        ? const Color(0xFFF8F0E4)
-                        : const Color(0xFF1F1B14),
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  priceLabel,
-                  style: GoogleFonts.manrope(
-                    fontSize: 10,
-                    color: dark
-                        ? const Color(0xFFB09A6A)
-                        : const Color(0xFFB0A08A),
-                    letterSpacing: 0.4,
-                  ),
-                ),
-
-                const SizedBox(height: 4),
-
-                // Trend chip
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 3,
-                  ),
-                  decoration: BoxDecoration(
-                    color: trendUp
-                        ? const Color(0xFFDCFCE7)
-                        : const Color(0xFFFFE4E6),
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        trendUp
-                            ? Icons.trending_up_rounded
-                            : Icons.trending_down_rounded,
-                        size: 11,
-                        color: trendUp
-                            ? const Color(0xFF16A34A)
-                            : const Color(0xFFDC2626),
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        percent,
-                        style: GoogleFonts.manrope(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
+                // Price row with trend chip
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          price,
+                          style: GoogleFonts.manrope(
+                            fontSize: 21,
+                            fontWeight: FontWeight.w800,
+                            color: dark
+                                ? const Color(0xFFF8F0E4)
+                                : const Color(0xFF1F1B14),
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          priceLabel,
+                          style: GoogleFonts.manrope(
+                            fontSize: 10,
+                            color: dark
+                                ? const Color(0xFFB09A6A)
+                                : const Color(0xFFB0A08A),
+                            letterSpacing: 0.4,
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (showTrendChip)
+                      // Trend chip
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
                           color: trendUp
-                              ? const Color(0xFF16A34A)
-                              : const Color(0xFFDC2626),
+                              ? const Color(0xFFDCFCE7)
+                              : const Color(0xFFFFE4E6),
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              trendUp
+                                  ? Icons.trending_up_rounded
+                                  : Icons.trending_down_rounded,
+                              size: 16,
+                              color: trendUp
+                                  ? const Color(0xFF16A34A)
+                                  : const Color(0xFFDC2626),
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              percent,
+                              style: GoogleFonts.manrope(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: trendUp
+                                    ? const Color(0xFF16A34A)
+                                    : const Color(0xFFDC2626),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                  ],
                 ),
               ],
             ),
